@@ -1,0 +1,4 @@
+framework module PPEnQualifyModule {
+  header "PPEnQualifyModule-Swift.h"
+  requires objc
+}

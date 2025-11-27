@@ -1,0 +1,42 @@
+enum InsiderEventEnum {
+  controlPanel('Kontrol Paneli'),
+  homePage('Ana Sayfa'),
+  ordersPage('Emirler Sekmesi'),
+  marketsPage('Piyasalar Sekmesi'),
+  portfolioPage('Portföy Sekmesi'),
+  loginPage('Login Sayfası'),
+  createAccountPage('Hesap Oluşturma Sayfası'),
+  istanbulStockExchangeTab('Borsa İstanbul Tab'),
+  eurobondTab('Eurobond Tab'),
+  americanStockExchanges('Amerikan Borsası Tab'),
+  ipoTab('Halka Arz Tab'),
+  investmentFundTab('Yatırım Fonu Tab'),
+  favoriteTab('Favorilerim Tab'),
+  journalTab('Gündem Tab'),
+  newsTab('Haberler Tab'),
+  economicCalendarTab('Ekonomik Takvim Tab'),
+  marketCommentTab('Piyasa Yorumları Tab'),
+  equityTab('Hisse Tab'),
+  viopTab('VIOP Tab'),
+  warrantTab('Varant Tab'),
+  alarmPage('Alarm Sayfası'),
+  priceAlarm('Fiyat Alarmı'),
+  newsAlarm('Haber Alarmı'),
+  setNewAlarm('Yeni Alarm Kur'),
+  analysisTab('Analiz Tab'),
+  readyPortfoy('Hazır Portföy'),
+  buySellPage('Al/Sat Sayfası'),
+  memberPage('Üyelik Sayfası'),
+  otpPage('Otp Sayfası'),
+  abroadTab('Yurt Dışı Sekmesi'),
+  advices('Öneriler'),
+  marketReviews('Piyasa İncelemeleri'),
+  seeAll('Tümünü Gör'),
+  delayedWidget('Gecikmeli Widget'),
+  symbolDetail('Symbol Detay');
+
+  final String value;
+  const InsiderEventEnum(
+    this.value,
+  );
+}

@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "550361324637",
+    "project_id": "piapiri-988b4",
+    "storage_bucket": "piapiri-988b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550361324637:android:6de4c5d0a2a33b94c6c1b4",
+        "android_client_info": {
+          "package_name": "com.unluco.piapiri"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxvDE5m3MpCAzIBZT-jae-CzO6zapdX2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550361324637-i8q99c6uels6h2u4k5t9pqujph7hm5ni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unluco.piapiri"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550361324637:android:e4974b443eb9a649c6c1b4",
+        "android_client_info": {
+          "package_name": "com.unluco.piapiri.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxvDE5m3MpCAzIBZT-jae-CzO6zapdX2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550361324637-i8q99c6uels6h2u4k5t9pqujph7hm5ni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unluco.piapiri"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550361324637:android:424fc630915f80d3c6c1b4",
+        "android_client_info": {
+          "package_name": "com.unluco.piapiri.qa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxvDE5m3MpCAzIBZT-jae-CzO6zapdX2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550361324637-i8q99c6uels6h2u4k5t9pqujph7hm5ni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.unluco.piapiri"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

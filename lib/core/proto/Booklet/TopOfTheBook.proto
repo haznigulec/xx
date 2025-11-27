@@ -1,0 +1,31 @@
+syntax="proto2"; 
+package messages; 
+
+option java_package = "com.matriksdata.radix.messages"; 
+option java_outer_classname = "TopOfTheBook"; 
+
+message Order { 
+    optional int64 orderID = 1;
+    optional int64 timestamp = 2;
+    optional double quantity = 3;
+    optional double price = 4; 
+} 
+
+message TopOfTheBookMessage { 
+    optional string symbol = 1; 
+    
+    repeated Order asks = 2; 
+    repeated Order bids = 3; 
+    enum Action { 
+        I = 0; 
+        U = 1; 
+        D = 2; 
+    } 
+    optional Action action = 4; 
+    enum BidAsk { 
+        A = 0; 
+        B = 1; 
+    } 
+    optional BidAsk bidAsk = 5; 
+    optional int32 affectedRow = 6; 
+}

@@ -1,0 +1,28 @@
+syntax="proto2";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+option java_outer_classname = "Messenger";
+
+message MessengerMessage {
+   required string code = 1;
+   optional string from = 2;
+   optional int64 timestamp = 3;
+   optional string contentType = 4 [default = "text/plain"];
+   optional string subject = 5;
+   optional string content = 6;
+}
+
+/*
+content-type:
+  text/plain
+  text/json
+  text/md
+*/
+
+/*
+ALERT
+DISCONNECT
+MULTICONNECT
+METAUPDATE
+*/

@@ -1,0 +1,22 @@
+syntax="proto3";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+option java_outer_classname = "Timestamp";
+
+message TimeMessage {
+    int64 timestamp = 1;
+    string source   = 2;
+    bool isBistPPHoliday = 3;
+    bool isBistPPOpen = 4;
+}
+
+/*
+0xF
+  source = "MX"
+  isBistPPHoliday = paketten
+  isBistPPOpen = paketten
+
+0x1571
+  source = paketten gelen exchange
+*/

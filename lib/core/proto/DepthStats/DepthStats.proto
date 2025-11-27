@@ -1,0 +1,13 @@
+syntax="proto3";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+option java_outer_classname = "DepthStats";
+
+message DepthStatsMessage {
+    int64 timestamp = 1;
+    double totalBidWAvg = 2;
+    double totalAskWAvg = 3;
+    double totalBidQuantity = 4;
+    double totalAskQuantity = 5;
+}

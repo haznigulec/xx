@@ -1,0 +1,198 @@
+plugins {
+    id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+    // END: FlutterFire Configuration
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
+android {
+    namespace = "com.unluco.piapiri"
+    compileSdk = 34
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    defaultConfig {
+        applicationId = "com.unluco.piapiri"
+        minSdkVersion 26
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        multiDexEnabled true
+        manifestPlaceholders = [partner:"piapiri", applicationName: "android.app.Application"]
+    }
+
+        signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig = signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+        buildConfig true
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            dimension "app"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "Piapiri DEV"
+        }
+        prod {
+            dimension "app"
+            resValue "string", "app_name", "Piapiri"
+        }
+        qa {
+            dimension "app"
+            applicationIdSuffix ".qa"
+            resValue "string", "app_name", "Piapiri QA"
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.useinsider:insider:14.2.4-nh'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation files('libs/enverify.aar')
+
+    implementation ('com.google.code.gson:gson:2.9.0')
+    implementation ('com.squareup.retrofit2:retrofit:2.9.0')
+    implementation ('com.squareup.retrofit2:converter-gson:2.9.0')
+    implementation ('androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2')
+    implementation ('com.squareup.okhttp3:logging-interceptor:4.10.0')
+    
+
+    implementation ('com.google.guava:guava:31.1-jre')
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.google.android.gms:play-services-mlkit-face-detection:17.1.0'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.2'
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0'
+    implementation 'com.google.android.gms:play-services-base:18.1.0'
+
+    implementation('io.socket:socket.io-client:1.0.1') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation "androidx.preference:preference-ktx:$preference_version"
+
+    implementation 'androidx.camera:camera-camera2:1.2.0-alpha04'
+    implementation 'androidx.camera:camera-lifecycle:1.2.0-alpha04'
+    implementation 'androidx.camera:camera-view:1.2.0-alpha04'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'org.jmrtd:jmrtd:0.7.19'
+
+    implementation 'net.sf.scuba:scuba-sc-android:0.0.23'
+    implementation 'org.jetbrains:annotations:17.0.0'
+
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4')
+
+    implementation 'com.google.dagger:hilt-android:2.42'
+    kapt 'com.google.dagger:hilt-android-compiler:2.42'
+    implementation('androidx.hilt:hilt-navigation-fragment:1.0.0')
+    implementation 'org.tensorflow:tensorflow-lite-support:0.4.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation('com.squareup.okhttp3:okhttp:4.10.0')
+
+    implementation 'com.googlecode.mp4parser:isoparser:1.1.22'
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.1'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.4.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.4.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
+
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    implementation("androidx.activity:activity-ktx:1.7.2") {
+    force = true
+    }
+    implementation("androidx.activity:activity:1.7.2") {
+        force = true
+    }
+    implementation("androidx.fragment:fragment-ktx:1.5.7") {
+    force = true
+}
+implementation("androidx.fragment:fragment:1.5.7") {
+    force = true
+}
+}

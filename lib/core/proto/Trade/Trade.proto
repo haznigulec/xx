@@ -1,0 +1,18 @@
+syntax="proto2";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+
+option java_outer_classname = "Trade";
+
+message TradeMessage {
+        required string symbol = 1 ;
+        optional string orderNo = 2 ;
+        optional float price  = 3 ;
+        optional int64 quantity = 4 ;
+        optional string activeBidOrAsk = 5 ;
+        optional int64 timestamp = 6 ;
+        optional string buyer = 7 ;
+        optional string seller = 8 ;
+        optional bool isTradeEx = 9 ;
+}

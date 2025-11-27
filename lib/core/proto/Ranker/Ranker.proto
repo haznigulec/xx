@@ -1,0 +1,22 @@
+syntax="proto2";
+package messages;
+option java_package = "com.matriksdata.radix.messages";
+
+option java_outer_classname = "Ranker";
+
+message Symbol {
+    required string key = 1 ;
+    optional double value = 2 ;
+    optional double last = 3;
+    optional double priceChange = 4;
+    optional double additionalValue = 5;
+    optional double ask = 6;
+    optional double bid = 7;
+    
+}
+
+message RankMessage {
+    repeated Symbol symbols = 1;
+    repeated Symbol bist30 = 2;
+    repeated Symbol bist100 = 3;
+}

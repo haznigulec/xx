@@ -1,0 +1,67 @@
+name: QA Distribute on Release Merge
+
+on:
+  workflow_dispatch:
+  #push:
+    # branches:
+    #   - qa
+  #pull_request:
+    # types: [opened]
+    # branches:
+    #   - qa
+    
+jobs:
+  qa-distribute:
+    #if: >
+    #  github.event.pull_request.base.ref == 'qa'
+    #  github.event.pull_request.merged == true &&
+    # &&
+    #  github.event.pull_request.head.ref == 'dev'
+    runs-on: macos-latest
+    environment: qa
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: 🛠️ Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.27.0"
+
+      - name: 📦 Install dependencies
+        run: flutter pub get
+
+      - name: 📦 Create Routes
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: 🏗️ Build Android (QA)
+        run: flutter build apk --flavor qa --release --target lib/main_qa.dart --no-tree-shake-icons
+
+      - name: 🏗️ Build iOS (QA)
+        run: flutter build ipa --flavor qa --release --target lib/main_qa.dart
+
+      - name: 🚀 Distribute to Firebase App Distribution (Android)
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID_QA }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: Ünlü Tester
+          file: build/app/outputs/flutter-apk/qaRelease/app-qa-release.apk
+
+      - name: 🍏 Upload to TestFlight (iOS)
+        uses: apple-actions/upload-testflight-build@v1
+        with:
+          app-path: build/ios/ipa/*.ipa
+          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}

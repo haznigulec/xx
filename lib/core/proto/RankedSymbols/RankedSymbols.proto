@@ -1,0 +1,16 @@
+syntax="proto2";
+package messages;
+option java_package = "com.matriksdata.radix.messages";
+
+option java_outer_classname = "RankedSymbols";
+
+message Line {
+    required string symbol = 1 ;
+    repeated double value = 2 ;
+}
+
+message RankedSymbolsMessage {
+    repeated Line lines = 1;
+    repeated string field = 2;
+}
+

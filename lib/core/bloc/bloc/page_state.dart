@@ -1,0 +1,15 @@
+enum PageState {
+  success,
+  loading,
+  initial,
+  failed,
+  readyToNavigate,
+  submitting,
+  fetching,
+  fetched,
+  updating,
+  updated,
+  willChange,
+  deleting,
+  deleted,
+}

@@ -1,0 +1,35 @@
+syntax="proto2";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+option java_outer_classname = "DepthTable";
+
+message DepthCell {
+    required double price = 1;
+    required int64 quantity = 2;
+    required int64 timestamp = 3;
+    required int64 orderCount = 4;
+}
+
+message DepthTableMessage {
+    required string symbol = 1;
+    optional string dateSymbol = 2;
+    optional int64 timestamp = 3;
+    repeated DepthCell asks = 4;
+    repeated DepthCell bids = 5;
+    enum Action {
+        I = 0;
+        U = 1;
+        D = 2;
+    }
+    optional Action action = 6;
+    enum BidAsk {
+        A = 0;
+        B = 1;
+    }
+    optional BidAsk bidAsk = 7;
+    optional int32 row = 8;
+    optional double actionPrice = 9;
+    optional int64 actionQuantity = 10;
+    optional int64 actionOrderCount = 11;
+}

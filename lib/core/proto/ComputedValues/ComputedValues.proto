@@ -1,0 +1,24 @@
+syntax="proto2";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+option java_outer_classname = "ComputedValues";
+
+message ComputedValuesMessage {
+  required string symbol = 1;
+  optional string updateDate = 2;
+  optional string optionClass = 3;
+  optional double strikePrice = 4;
+  optional double impliedVolatility = 5;
+  optional double instrinsicValue = 6;
+  optional double timeValue = 7;
+  optional double leverage = 8;
+  optional double delta = 9;
+  optional double gamma = 10;
+  optional double theta  = 11;
+  optional double vega = 12;
+  optional double rho = 13;
+  optional double breakEven = 14;
+  optional double omega = 15;
+  optional double sensitivity = 16;
+}

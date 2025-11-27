@@ -1,0 +1,28 @@
+syntax = "proto2";
+package messages;
+
+option java_package = "com.matriksdata.radix.messages";
+
+option java_outer_classname = "News";
+
+message RelatedNews {
+    required string id = 1;
+    required string headline = 2;
+}
+
+message NewsMessage {
+    required string id = 1;
+    optional bool isFlash = 2 [default = false];
+    optional bool deleted = 3 [default = false];
+    optional int64 timestamp = 4;
+    optional string headline = 5;
+    optional string content = 6;
+    repeated string source = 7;
+    repeated string category = 8;
+    repeated string symbol = 9;
+    optional string language = 10 [default = 'TR'];
+    repeated string attachment = 11;
+    optional string dailyNewsNo = 12;
+    optional string chainId = 13;
+    repeated RelatedNews relatedNews = 14;
+}

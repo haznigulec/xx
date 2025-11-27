@@ -1,0 +1,736 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-experimental-feature OpaqueTypeErasure -enable-bare-slash-regex -module-name PPEnQualifyModule
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+import AVFoundation
+import Alamofire
+import CoreNFC
+import DeveloperToolsSupport
+import EnQualify
+import Foundation
+import IQKeyboardManagerSwift
+import Network
+import Photos
+import Swift
+import SwiftUI
+import Toaster
+import UIKit
+import WebKit
+import _Concurrency
+import _CoreNFC_UIKit
+import _StringProcessing
+import _SwiftConcurrencyShims
+public enum HoloDetectionType : Swift.String {
+  case NO_HOLO
+  case HOLO1_DETECT
+  case HOLO2_DETECT
+  case HOLO_ANY_DETECT
+  case HOLO_ALL_DETECT
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum AgentRequestType {
+  case none
+  case nfc
+  case ocr
+  case liveness
+  case faceRecognition
+  case agent
+  case busy
+  public static func == (a: PPEnQualifyModule.AgentRequestType, b: PPEnQualifyModule.AgentRequestType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum Gender : Swift.String {
+  case FEMALE
+  case MALE
+  case NONE
+  case FEMALEFORKPS
+  case MALEFORKPS
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ExceptionInfoResponse : Swift.Codable {
+  public var code: Swift.Int?
+  public var message: Swift.String?
+  public init(code: Swift.Int?, message: Swift.String?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public func getAppVersionInfo() -> Swift.String
+public func setBasePath(isProd: Swift.Bool)
+@_hasMissingDesignatedInitializers open class UserAPI {
+  open class func apiUserCheckVersionPost(body: PPEnQualifyModule.PayloadRequest, completion: @escaping ((_ data: PPEnQualifyModule.BaseResponse?, _ error: (any Swift.Error)?) -> Swift.Void))
+  open class func apiUserCheckVersionPostWithRequestBuilder(body: PPEnQualifyModule.PayloadRequest) -> PPEnQualifyModule.RequestBuilder<PPEnQualifyModule.BaseResponse>
+  open class func apiUserSavePost(body: PPEnQualifyModule.PayloadRequest, completion: @escaping ((_ data: PPEnQualifyModule.BaseResponse?, _ error: (any Swift.Error)?) -> Swift.Void))
+  open class func apiUserSavePostWithRequestBuilder(body: PPEnQualifyModule.PayloadRequest) -> PPEnQualifyModule.RequestBuilder<PPEnQualifyModule.BaseResponse>
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class Device {
+  public static func version() -> PPEnQualifyModule.Version
+  public static func size() -> PPEnQualifyModule.Size
+  public static func type() -> PPEnQualifyModule.`Type`
+  @available(*, deprecated, message: "use == operator instead")
+  public static func isEqualToScreenSize(_ size: PPEnQualifyModule.Size) -> Swift.Bool
+  @available(*, deprecated, message: "use > operator instead")
+  public static func isLargerThanScreenSize(_ size: PPEnQualifyModule.Size) -> Swift.Bool
+  @available(*, deprecated, message: "use < operator instead")
+  public static func isSmallerThanScreenSize(_ size: PPEnQualifyModule.Size) -> Swift.Bool
+  public static func isRetina() -> Swift.Bool
+  public static func isPad() -> Swift.Bool
+  public static func isPhone() -> Swift.Bool
+  public static func isIphoneTopNotch() -> Swift.Bool
+  public static func isPod() -> Swift.Bool
+  public static func isSimulator() -> Swift.Bool
+  @objc deinit
+}
+public enum Size : Swift.Int, Swift.Comparable {
+  case unknownSize
+  case screen3v5Inch
+  case screen4Inch
+  case screen4v7Inch
+  case screen5v5Inch
+  case screen5v8Inch
+  case screen7v9Inch
+  case screen9v7Inch
+  case screen10v5Inch
+  case screen12v9Inch
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public func < (lhs: PPEnQualifyModule.Size, rhs: PPEnQualifyModule.Size) -> Swift.Bool
+public func == (lhs: PPEnQualifyModule.Size, rhs: PPEnQualifyModule.Size) -> Swift.Bool
+public enum Type : Swift.String {
+  case iPhone
+  case iPad
+  case iPod
+  case simulator
+  case unknown
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum Version : Swift.String {
+  case iPhone4
+  case iPhone4S
+  case iPhone5
+  case iPhone5C
+  case iPhone5S
+  case iPhone6
+  case iPhone6Plus
+  case iPhone6S
+  case iPhone6SPlus
+  case iPhoneSE
+  case iPhone7
+  case iPhone7Plus
+  case iPhone8
+  case iPhone8Plus
+  case iPhoneX
+  case iPad1
+  case iPad2
+  case iPad3
+  case iPad4
+  case iPad5
+  case iPadAir
+  case iPadAir2
+  case iPadMini
+  case iPadMini2
+  case iPadMini3
+  case iPadMini4
+  case iPadPro9v7Inch
+  case iPadPro10v5Inch
+  case iPadPro12v9Inch
+  case iPodTouch1Gen
+  case iPodTouch2Gen
+  case iPodTouch3Gen
+  case iPodTouch4Gen
+  case iPodTouch5Gen
+  case iPodTouch6Gen
+  case simulator
+  case unknown
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct PayloadRequest : Swift.Codable {
+  public var tenantId: Swift.Int?
+  public var customerId: Swift.Double?
+  public var operatingSystem: Swift.String?
+  public var osVersion: Swift.String?
+  public var clientDevice: Swift.String?
+  public var appVersion: Swift.String?
+  public init(tenantId: Swift.Int?, customerId: Swift.Double?, operatingSystem: Swift.String?, osVersion: Swift.String?, clientDevice: Swift.String?, appVersion: Swift.String?)
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case tenantId
+    case customerId
+    case operatingSystem
+    case osVersion
+    case clientDevice
+    case appVersion
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_inheritsConvenienceInitializers open class AlamofireRequestBuilder<T> : PPEnQualifyModule.RequestBuilder<T> {
+  required public init(method: Swift.String, URLString: Swift.String, parameters: [Swift.String : Any]?, isBody: Swift.Bool, headers: [Swift.String : Swift.String] = [:])
+  open func createSessionManager() -> Alamofire.Session
+  open func contentTypeForFormPart(fileURL: Foundation.URL) -> Swift.String?
+  open func makeRequest(manager: Alamofire.Session, method: Alamofire.HTTPMethod, encoding: any Alamofire.ParameterEncoding, headers: [Swift.String : Swift.String]) -> Alamofire.DataRequest
+  override open func execute(_ completion: @escaping (_ response: PPEnQualifyModule.Response<T>?, _ error: (any Swift.Error)?) -> Swift.Void)
+  open func buildHeaders() -> Alamofire.HTTPHeaders
+  @objc deinit
+}
+public enum AlamofireDecodableRequestBuilderError : Swift.Error {
+  case emptyDataResponse
+  case nilHTTPResponse
+  case jsonDecoding(Swift.DecodingError)
+  case generalError(any Swift.Error)
+}
+@_inheritsConvenienceInitializers open class AlamofireDecodableRequestBuilder<T> : PPEnQualifyModule.AlamofireRequestBuilder<T> where T : Swift.Decodable {
+  required public init(method: Swift.String, URLString: Swift.String, parameters: [Swift.String : Any]?, isBody: Swift.Bool, headers: [Swift.String : Swift.String] = super)
+  @objc deinit
+}
+extension Swift.String {
+  public func convertToLowercaseTr() -> Swift.String
+  public func uppercasedWithLocale() -> Swift.String
+}
+@_hasMissingDesignatedInitializers open class SwaggerClientAPI {
+  public static var basePath: Swift.String
+  public static var credential: Foundation.URLCredential?
+  public static var customHeaders: [Swift.String : Swift.String]
+  public static var requestBuilderFactory: any PPEnQualifyModule.RequestBuilderFactory
+  @objc deinit
+}
+open class RequestBuilder<T> {
+  final public let parameters: [Swift.String : Any]?
+  final public let isBody: Swift.Bool
+  final public let method: Swift.String
+  final public let URLString: Swift.String
+  public var onProgressReady: ((Foundation.Progress) -> ())?
+  required public init(method: Swift.String, URLString: Swift.String, parameters: [Swift.String : Any]?, isBody: Swift.Bool, headers: [Swift.String : Swift.String] = [:])
+  open func addHeaders(_ aHeaders: [Swift.String : Swift.String])
+  open func execute(_ completion: @escaping (_ response: PPEnQualifyModule.Response<T>?, _ error: (any Swift.Error)?) -> Swift.Void)
+  public func addHeader(name: Swift.String, value: Swift.String) -> Self
+  open func addCredential() -> Self
+  @objc deinit
+}
+public protocol RequestBuilderFactory {
+  func getNonDecodableBuilder<T>() -> PPEnQualifyModule.RequestBuilder<T>.Type
+  func getBuilder<T>() -> PPEnQualifyModule.RequestBuilder<T>.Type where T : Swift.Decodable
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency public func openAlert(title: Swift.String, message: Swift.String, alertStyle: UIKit.UIAlertController.Style, actionTitles: [Swift.String], actionStyles: [UIKit.UIAlertAction.Style], actions: [((UIKit.UIAlertAction) -> Swift.Void)])
+}
+@_hasMissingDesignatedInitializers open class JSONEncodingHelper {
+  open class func encodingParameters<T>(forEncodableObject encodableObj: T?) -> Alamofire.Parameters? where T : Swift.Encodable
+  open class func encodingParameters(forEncodableObject encodableObj: Any?) -> Alamofire.Parameters?
+  @objc deinit
+}
+public typealias EncodeResult = (data: Foundation.Data?, error: (any Swift.Error)?)
+@_hasMissingDesignatedInitializers open class CodableHelper {
+  public static var dateformatter: Foundation.DateFormatter?
+  open class func decode<T>(_ type: T.Type, from data: Foundation.Data) -> (decodableObj: T?, error: (any Swift.Error)?) where T : Swift.Decodable
+  open class func encode<T>(_ value: T, prettyPrint: Swift.Bool = false) -> PPEnQualifyModule.EncodeResult where T : Swift.Encodable
+  @objc deinit
+}
+public struct JSONDataEncoding : Alamofire.ParameterEncoding {
+  public func encode(_ urlRequest: any Alamofire.URLRequestConvertible, with parameters: Alamofire.Parameters?) throws -> Foundation.URLRequest
+  public static func encodingParameters(jsonData: Foundation.Data?) -> Alamofire.Parameters?
+}
+public enum JSONValue : Swift.Codable, Swift.Equatable {
+  case string(Swift.String)
+  case int(Swift.Int)
+  case double(Swift.Double)
+  case bool(Swift.Bool)
+  case object([Swift.String : PPEnQualifyModule.JSONValue])
+  case array([PPEnQualifyModule.JSONValue])
+  case null
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public static func == (a: PPEnQualifyModule.JSONValue, b: PPEnQualifyModule.JSONValue) -> Swift.Bool
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByStringLiteral {
+  public init(stringLiteral value: Swift.String)
+  public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+  public typealias StringLiteralType = Swift.String
+  public typealias UnicodeScalarLiteralType = Swift.String
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.Int)
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByFloatLiteral {
+  public init(floatLiteral value: Swift.Double)
+  public typealias FloatLiteralType = Swift.Double
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByBooleanLiteral {
+  public init(booleanLiteral value: Swift.Bool)
+  public typealias BooleanLiteralType = Swift.Bool
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, PPEnQualifyModule.JSONValue)...)
+  public typealias Key = Swift.String
+  public typealias Value = PPEnQualifyModule.JSONValue
+}
+extension PPEnQualifyModule.JSONValue : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: PPEnQualifyModule.JSONValue...)
+  public typealias ArrayLiteralElement = PPEnQualifyModule.JSONValue
+}
+@_hasMissingDesignatedInitializers public class LocalStorage {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class Configuration {
+  public static var dateFormat: Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @available(iOS 14.0, *)
+public class LocalNetworkAuthorization : ObjectiveC.NSObject {
+  public func requestAuthorization(completion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@available(iOS 14.0, *)
+extension PPEnQualifyModule.LocalNetworkAuthorization : Foundation.NetServiceDelegate {
+  @objc dynamic public func netServiceDidPublish(_ sender: Foundation.NetService)
+}
+public class EnverifyVerifyAvailableAppointmentListCustom {
+  public var date: Foundation.Date?
+  public var startTime: Swift.String?
+  public var endTime: Swift.String?
+  public var isSelected: Swift.Bool?
+  public init(date: Foundation.Date? = nil, startTime: Swift.String? = nil, endTime: Swift.String? = nil, isSelected: Swift.Bool? = false)
+  @objc deinit
+}
+public enum IdentityType : Swift.String {
+  case PASSAPORT
+  case IDENTITY
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ErrorResponse : Swift.Error {
+  case error(Swift.Int, Foundation.Data?, any Swift.Error)
+}
+open class Response<T> {
+  final public let statusCode: Swift.Int
+  final public let header: [Swift.String : Swift.String]
+  final public let body: T?
+  public init(statusCode: Swift.Int, header: [Swift.String : Swift.String], body: T?)
+  convenience public init(response: Foundation.HTTPURLResponse, body: T?)
+  @objc deinit
+}
+public var iconStartButton: UIKit.UIButton
+public var iconExitButton: UIKit.UIButton
+public var iconRetryButton: UIKit.UIButton
+public var iconExitRetryButton: UIKit.UIButton
+public var iconHangupRetryButton: UIKit.UIButton
+public var iconHangupChatButton: UIKit.UIButton
+public var iconCallButton: UIKit.UIButton
+public var iconHangupButton: UIKit.UIButton
+public var iconRotateButton: UIKit.UIButton
+public var iconChatRotateButton: UIKit.UIButton
+public var iconFlashButton: UIKit.UIButton
+public var iconResultButton: UIKit.UIButton
+public struct BaseResponse : Swift.Codable {
+  public var exceptionInfo: PPEnQualifyModule.ExceptionInfoResponse?
+  public var isSuccessful: Swift.Bool?
+  public var statusCode: Swift.Int?
+  public var updateDate: Swift.String?
+  public var lastVersionLink: Swift.String?
+  public init(exceptionInfo: PPEnQualifyModule.ExceptionInfoResponse?, isSuccessful: Swift.Bool?, statusCode: Swift.Int?, updateDate: Swift.String?, lastVersionLink: Swift.String?)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @IBDesignable @_Concurrency.MainActor @preconcurrency open class LocalizableUITextField : UIKit.UITextField {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @IBDesignable @_Concurrency.MainActor @preconcurrency open class LocalizableUITextView : UIKit.UITextView {
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+public struct LocalStorageConstants {
+  public static let KEY_IS_FIRST_LAUNCH: Swift.String
+  public static let KEY_APP_LANGUAGE: Swift.String
+  public static let KEY_CONFIGURATION_CODE: Swift.String
+  public static let KEY_USER_VERIFICATION: Swift.String
+  public static let KEY_USER_NAME: Swift.String
+  public static let KEY_USER_SURNAME: Swift.String
+  public static let KEY_USER_TCKNO: Swift.String
+  public static let KEY_USER_GSM: Swift.String
+  public static let KEY_USER_FORMATTED_GSM: Swift.String
+  public static let KEY_USER_MAIL: Swift.String
+  public static let KEY_USER_OTP: Swift.String
+  public static let KEY_CUSTOMER_REFERANCE_CODE: Swift.String
+  public static let KEY_SERVICE_STATE: Swift.String
+  public static let KEY_LIVENESS_MODE: Swift.String
+  public static let KEY_OCR_MODE: Swift.String
+  public static let KEY_OCR_CHECK_VALUE: Swift.String
+  public static let KEY_LIVENESS_CALIBRATION: Swift.String
+  public static let KEY_EYE_CLOSE_MAX_TIME: Swift.String
+  public static let KEY_FACE_ANGLE_CALIBRATION: Swift.String
+  public static let KEY_SMILING_CALIBRATION: Swift.String
+  public static let KEY_EYE_CLOSE_CALIBRATION: Swift.String
+  public static let KEY_HOLO_DETECTION_TYPE: Swift.String
+  public static let KEY_DETECTION_THRESHOLD: Swift.String
+  public static let KEY_CAN_AUTO_CLOSE: Swift.String
+  public static let KEY_TRANSACTION_DETAIL: Swift.String
+  public static let KEY_ROUTING_SCREEN: Swift.String
+  public static let KEY_SERIAL_NUMBER: Swift.String
+  public static let KEY_EXPIRY_DATE_NFC_FACE_FORMAT: Swift.String
+  public static let KEY_EXPIRY_DATE: Swift.String
+  public static let KEY_BIRTHDAY_NFC_FACE_FORMAT: Swift.String
+  public static let KEY_BIRTHDAY: Swift.String
+  public static let KEY_GENDER: Swift.String
+  public static let KEY_NATIONALITY_NAME_FLAG: Swift.String
+  public static let KEY_NATIONALITY_CODE: Swift.String
+  public static let KEY_BRANCH_NAME: Swift.String
+  public static let KEY_APP_NEEDS_RESTART: Swift.String
+  public static let FACE_UPLOAD_DATA_STATE: Swift.String
+  public static let MEDIA_SERVER: Swift.String
+  public static let KEY_CALL_REFERENCE_ID: Swift.String
+  public static let KEY_CONTINUE_CALL_PREFERENCE: Swift.String
+  public static let hasRoutingAgentVoiceStarted: Swift.String
+}
+public enum Strings : Swift.String {
+  case settings
+  case select
+  case close
+  case ok
+  case try_again
+  case warning
+  case update
+  case congratulations
+  case error
+  case your_conf_code
+  case enter_conf_code
+  case continue_
+  case customer_info_form
+  case your_name_surname
+  case your_name
+  case your_surname
+  case your_gsm
+  case your_mail
+  case your_id
+  case allow_clear_consent
+  case allow_video_recording
+  case want_to_do_the_conversation_in_sign_language
+  case create_appointment
+  case update_appointment
+  case appointments
+  case no_appointments
+  case my_appointments
+  case my_current_appointments
+  case past_transactions
+  case prepare_your_card_or_passport
+  case exit
+  case no_nfc
+  case date_of_birth
+  case doc_no
+  case gender
+  case nationality
+  case expiry
+  case barcode
+  case retry
+  case confirm
+  case finish
+  case select_type_of_transaction_appointment_for
+  case select_reason_for_appointment
+  case select_appointment_date
+  case select_date
+  case back
+  case you_will_be_connected_to_agent
+  case cancel
+  case choose_appointment_title
+  case choose_appointment_subtitle
+  case appointment_detail
+  case will_be_created_if_you_want_to_continue_confirm_button
+  case appointment_reason
+  case meeting_date
+  case meeting_time
+  case change_password
+  case new_customer
+  case selected_appointment_will_be_cancelled_confirm
+  case already_has_appointment_same_type_of_appointment
+  case select_appointment_type
+  case your_appointment_deleted
+  case error_deleting_appointment
+  case your_appointment_saved
+  case no_available_appointment
+  case all_information_you_saved_will_be_deleted
+  case mic_and_cam_off_please_turn_on
+  case your_appointment_updated
+  case error_creating_appointment
+  case you_dont_have_a_current_appointment
+  case an_unexpected_error_has_occurred
+  case without_holo
+  case change_language_from_settings
+  case ID_information
+  case ID_serial_number
+  case ID_expiry_date
+  case check_your_ID_info
+  case screen_recording
+  case screen_recording_will_end
+  case screen_recording_error
+  case screen_recording_is_required
+  case abort
+  case languageImageName
+  case appNeedsRestart
+  case appWillBeStarted
+  case tapToRestart
+  case save
+  case reset_all_settings
+  case all_settings_reset
+  case flow_types
+  case holo_types
+  case calibration_code
+  case time_limit_for_open_eye_command
+  case face_angle_calibration
+  case smile_calibration
+  case eye_close_calibration
+  case can_auto_close_title
+  case can_auto_close
+  case transaction_details
+  case show_transaction_result_details
+  case routing_screens
+  case show_routing_screens
+  case fill_customer_code
+  case easy
+  case hard
+  case ocr_mode
+  case liveliness
+  case face_recognition
+  case contact
+  case about
+  case reason_for_application
+  case female
+  case male
+  case yes
+  case no
+  case settings_saved
+  case config_error
+  case front_camera_error
+  case detection_Threshold
+  case all_rights_reserved
+  case app_info_text
+  case flow_title
+  case flow_subtitle
+  case flow_id
+  case flow_nfc
+  case flow_face
+  case flow_second_title
+  case flow_second_subtitle
+  case flow_third_subtitle
+  case routing_ocr_title
+  case routing_nfc_title
+  case routing_face_title
+  case routing_face_subtitle
+  case success_ocr_label
+  case success_ocr_id_info
+  case success_ocr_results
+  case success_front_general
+  case success_front_gender_national
+  case success_front_hologram_1
+  case success_front_hologram_2
+  case success_front_Guilloche_1
+  case success_front_Guilloche_2
+  case success_front_Flag
+  case success_front_Signature
+  case success_front_Biometric_Photos
+  case success_front_Parliament_Sign
+  case success_back_General
+  case success_back_ICAO_Logo
+  case success_back_Chip
+  case success_back_Barcode
+  case success_back_Guilloche
+  case success_nfc_label
+  case success_nfc_chip_info
+  case success_face_label
+  case success_face_info
+  case success_face_chip_photo
+  case success_face_id_photo
+  case success_face_Antispoofing
+  case success_face_smile
+  case success_face_eye_close
+  case success_face_hash_check
+  case success_face_photo
+  case success_face_id_front_photo
+  case success_face_chip_front_photo
+  case routing_agent_title
+  case routing_agent_subtitle
+  case routing_agent_first_blue
+  case routing_agent_second_blue
+  case routing_agent_signLang
+  case validation_name
+  case validation_surname
+  case validation_id_number
+  case validation_gsm
+  case validation_email
+  case validation_kvkk
+  case fail_ocr_title
+  case fail_nfc_title
+  case fail_face_title
+  case congragulations_title
+  case congragulations_subtitle
+  case luminosityAnalyzed_popup
+  case screenRecord_error_popup
+  case resultGetCompleted_popup
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension Swift.String {
+  public var stringValue: Swift.String {
+    get
+  }
+  public init?(stringValue: Swift.String)
+  public var intValue: Swift.Int? {
+    get
+  }
+  public init?(intValue: Swift.Int)
+}
+extension Swift.KeyedEncodingContainerProtocol {
+  public mutating func encodeArray<T>(_ values: [T], forKey key: Self.Key) throws where T : Swift.Encodable
+  public mutating func encodeArrayIfPresent<T>(_ values: [T]?, forKey key: Self.Key) throws where T : Swift.Encodable
+  public mutating func encodeMap<T>(_ pairs: [Self.Key : T]) throws where T : Swift.Encodable, Self.Key : Swift.Hashable
+  public mutating func encodeMapIfPresent<T>(_ pairs: [Self.Key : T]?) throws where T : Swift.Encodable, Self.Key : Swift.Hashable
+}
+extension Swift.KeyedDecodingContainerProtocol {
+  public func decodeArray<T>(_ type: T.Type, forKey key: Self.Key) throws -> [T] where T : Swift.Decodable
+  public func decodeArrayIfPresent<T>(_ type: T.Type, forKey key: Self.Key) throws -> [T]? where T : Swift.Decodable
+  public func decodeMap<T>(_ type: T.Type, excludedKeys: Swift.Set<Self.Key>) throws -> [Self.Key : T] where T : Swift.Decodable, Self.Key : Swift.Hashable
+}
+@_hasMissingDesignatedInitializers public class UserManager {
+  public static let shared: PPEnQualifyModule.UserManager
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class PPModule : ObjectiveC.NSObject {
+  @objc public static var moduleNavigationController: UIKit.UINavigationController?
+  public static func startEnQualifySDK(identifier: Swift.String, sender: Any, isProd: Swift.Bool)
+  @available(iOS 13.0, *)
+  @objc public static func setNavigationConfiguration(navigationController: Any)
+  @objc public static func setSSLPiningWithCertificate(required: Swift.Bool)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol PPModuleDelegate {
+  @objc func moduleExitedSuccess()
+  @objc func moduleExitedFailure()
+  @objc func moduleStartFailure()
+  @objc func adjustEventTriggered(eventToken: Swift.String)
+}
+public enum AdjustEventStates : Swift.String {
+  case onWelcome
+  case onWhatsWaiting
+  case onFormView
+  case onOTP
+  case onIdDetail
+  case onFaceRecognition
+  case onInvestorInfo
+  case onContractApproval
+  case onAppointment
+  case onVideoCallInfo
+  case onVideoCallWaiting
+  case onVideoCallEnd
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct APIHelper {
+  public static func rejectNil(_ source: [Swift.String : Any?]) -> [Swift.String : Any]?
+  public static func rejectNilHeaders(_ source: [Swift.String : Any?]) -> [Swift.String : Swift.String]
+  public static func convertBoolToString(_ source: [Swift.String : Any]?) -> [Swift.String : Any]?
+  public static func mapValuesToQueryItems(_ source: [Swift.String : Any?]) -> [Foundation.URLQueryItem]?
+}
+extension UIKit.UIFont {
+  public enum InterType : Swift.String {
+    case black
+    case bold
+    case extraBold
+    case extraLight
+    case light
+    case medium
+    case regular
+    case semibold
+    case thin
+    public init?(rawValue: Swift.String)
+    @available(iOS 2.0, *)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @IBDesignable @_Concurrency.MainActor @preconcurrency public class CustomProgressView : UIKit.UIView {
+  @objc deinit
+}
+extension UIKit.UIColor {
+  public class var random: UIKit.UIColor {
+    get
+  }
+}
+extension PPEnQualifyModule.HoloDetectionType : Swift.Equatable {}
+extension PPEnQualifyModule.HoloDetectionType : Swift.Hashable {}
+extension PPEnQualifyModule.HoloDetectionType : Swift.RawRepresentable {}
+extension PPEnQualifyModule.AgentRequestType : Swift.Equatable {}
+extension PPEnQualifyModule.AgentRequestType : Swift.Hashable {}
+extension PPEnQualifyModule.Gender : Swift.Equatable {}
+extension PPEnQualifyModule.Gender : Swift.Hashable {}
+extension PPEnQualifyModule.Gender : Swift.RawRepresentable {}
+extension PPEnQualifyModule.Size : Swift.Hashable {}
+extension PPEnQualifyModule.Size : Swift.RawRepresentable {}
+extension PPEnQualifyModule.`Type` : Swift.Equatable {}
+extension PPEnQualifyModule.`Type` : Swift.Hashable {}
+extension PPEnQualifyModule.`Type` : Swift.RawRepresentable {}
+extension PPEnQualifyModule.Version : Swift.Equatable {}
+extension PPEnQualifyModule.Version : Swift.Hashable {}
+extension PPEnQualifyModule.Version : Swift.RawRepresentable {}
+extension PPEnQualifyModule.PayloadRequest.CodingKeys : Swift.Equatable {}
+extension PPEnQualifyModule.PayloadRequest.CodingKeys : Swift.Hashable {}
+extension PPEnQualifyModule.PayloadRequest.CodingKeys : Swift.RawRepresentable {}
+extension PPEnQualifyModule.IdentityType : Swift.Equatable {}
+extension PPEnQualifyModule.IdentityType : Swift.Hashable {}
+extension PPEnQualifyModule.IdentityType : Swift.RawRepresentable {}
+extension PPEnQualifyModule.Strings : Swift.Equatable {}
+extension PPEnQualifyModule.Strings : Swift.Hashable {}
+extension PPEnQualifyModule.Strings : Swift.RawRepresentable {}
+extension PPEnQualifyModule.AdjustEventStates : Swift.Equatable {}
+extension PPEnQualifyModule.AdjustEventStates : Swift.Hashable {}
+extension PPEnQualifyModule.AdjustEventStates : Swift.RawRepresentable {}
+extension UIKit.UIFont.InterType : Swift.Equatable {}
+extension UIKit.UIFont.InterType : Swift.Hashable {}
+extension UIKit.UIFont.InterType : Swift.RawRepresentable {}
